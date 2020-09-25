@@ -1,0 +1,6 @@
+.management_address.*
+.id_rsa.*
+.terraform
+clouds.yaml
+secure.yaml
+terraform.tfstate*

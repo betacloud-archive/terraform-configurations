@@ -1,0 +1,24 @@
+.:53 {
+  any
+  forward . 8.8.8.8 9.9.9.9
+  log
+  errors
+  acl {
+    allow net 172.16.0.0/12
+    block
+  }
+}
+
+okeanos.xyz:53 {
+  any
+  file /configuration/okeanos.xyz.db
+  log
+  errors
+}
+
+okeanos.dev:53 {
+  any
+  file /configuration/okeanos.dev.db
+  log
+  errors
+}

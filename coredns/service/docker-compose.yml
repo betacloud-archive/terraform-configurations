@@ -1,0 +1,14 @@
+---
+version: '3.5'
+
+services:
+  coredns:
+    container_name: "coredns"
+    image: "coredns/coredns:latest"
+    restart: unless-stopped
+    command: -conf /configuration/Corefile
+    volumes:
+      - ./configuration/:/configuration
+    ports:
+      - 53:53
+      - 53:53/udp

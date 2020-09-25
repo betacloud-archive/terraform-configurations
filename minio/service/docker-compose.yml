@@ -1,0 +1,54 @@
+---
+version: '3.5'
+
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:2.3
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./configuration/traefik.yml:/etc/traefik/traefik.yml:ro
+      - acme:/etc/traefik/acme
+    labels:
+      - "traefik.enable=true"
+
+  minio:
+    container_name: minio
+    image: minio/minio
+    restart: unless-stopped
+    command: server /data
+    volumes:
+      - minio:/data
+    env_file:
+      - configuration/minio.env
+    ports:
+      - 9000:9000
+    healthcheck:
+      test: wget -q -O - http://localhost:9000/minio/health/live
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minio.entrypoints=http"
+      - "traefik.http.routers.minio.rule=Host(`minio.okeanos.dev`)"
+      - "traefik.http.middlewares.minio-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.minio.middlewares=minio-https-redirect"
+      - "traefik.http.routers.minio-secure.entrypoints=https"
+      - "traefik.http.routers.minio-secure.rule=Host(`minio.okeanos.dev`)"
+      - "traefik.http.routers.minio-secure.tls=true"
+      - "traefik.http.routers.minio-secure.tls.certresolver=http"
+    secrets:
+      - MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY
+
+volumes:
+  minio:
+  acme:
+
+secrets:
+  MINIO_ACCESS_KEY:
+    file: ./secrets/MINIO_ACCESS_KEY
+  MINIO_SECRET_KEY:
+    file: ./secrets/MINIO_SECRET_KEY
