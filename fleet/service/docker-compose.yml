@@ -1,0 +1,64 @@
+---
+version: '3.5'
+
+services:
+  fleet:
+    container_name: fleet
+    image: linuxserver/fleet:latest
+    restart: unless-stopped
+    env_file:
+      - "./configuration/fleet.env"
+    volumes:
+      - /etc/hosts:/etc/hosts:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    ports:
+      - 8080:8080
+    depends_on:
+      - mariadb
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fleet.entrypoints=http"
+      - "traefik.http.routers.fleet.rule=Host(`fleet.okeanos.dev`)"
+      - "traefik.http.middlewares.fleet-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.fleet.middlewares=fleet-https-redirect"
+      - "traefik.http.routers.fleet-secure.entrypoints=https"
+      - "traefik.http.routers.fleet-secure.rule=Host(`fleet.okeanos.dev`)"
+      - "traefik.http.routers.fleet-secure.tls=true"
+      - "traefik.http.routers.fleet-secure.tls.certresolver=http"
+
+  mariadb:
+    container_name: mariadb
+    restart: unless-stopped
+    image: mariadb:10.5
+    env_file:
+      - "./configuration/mariadb.env"
+    volumes:
+      - "mariadb:/var/lib/mysql"
+    secrets:
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+
+  traefik:
+    container_name: traefik
+    image: traefik:2.3
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./configuration/traefik.yml:/etc/traefik/traefik.yml:ro
+      - acme:/etc/traefik/acme
+    labels:
+      - "traefik.enable=true"
+
+volumes:
+  acme:
+  mariadb:
+
+secrets:
+  MYSQL_PASSWORD:
+    file: ./secrets/MYSQL_PASSWORD
+  MYSQL_ROOT_PASSWORD:
+    file: ./secrets/MYSQL_ROOT_PASSWORD
