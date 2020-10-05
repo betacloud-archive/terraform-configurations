@@ -10,5 +10,5 @@ $TTL 3600
 @             IN NS coredns1.data-infrastructure.xyz.
 @             IN NS coredns2.data-infrastructure.xyz.
 @             IN A 127.0.0.1
+gx-scs        IN A 127.0.0.1
 minio         IN A 81.163.192.111
-fleet         IN A 81.163.192.112
