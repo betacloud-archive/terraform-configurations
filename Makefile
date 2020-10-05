@@ -17,7 +17,7 @@ endif
 	@MANAGEMENT_ADDRESS=$$(terraform output management_address); \
 	echo "MANAGEMENT_ADDRESS=$$MANAGEMENT_ADDRESS" > $@;
 
-.id_rsa.$(ENVIRONMENT).$(NAME):
+.id_rsa.$(IDENTIFIER):
 	@PRIVATE_KEY=$$(terraform output management_key); \
 	echo "$$PRIVATE_KEY" > $@; \
 	chmod 0600 $@
