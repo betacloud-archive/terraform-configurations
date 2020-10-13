@@ -10,6 +10,7 @@ $TTL 3600
 @             IN NS coredns1.data-infrastructure.xyz.
 @             IN NS coredns2.data-infrastructure.xyz.
 @             IN A 127.0.0.1
+gx-iam        IN A 213.131.234.72
 gx-scs        IN A 213.131.234.71
 harbor        IN A 45.114.122.134
 minio         IN A 81.163.192.111
