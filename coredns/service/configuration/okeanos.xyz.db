@@ -12,3 +12,5 @@ $TTL 3600
 @              IN A 127.0.0.1
 testbed-gx-iam IN A 81.163.192.112
 keycloak       IN A 81.163.192.135
+gardener       IN A 213.131.230.153
+*.gardener     IN A 213.131.230.153
