@@ -22,3 +22,15 @@ okeanos.dev:53 {
   log
   errors
 }
+
+gx.okeanos.dev:53 {
+    secondary {
+        transfer from 213.131.234.86 213.131.234.87 213.131.234.88
+    }
+}
+
+gardener.okeanos.xyz:53 {
+    secondary {
+        transfer from 213.131.234.86 213.131.234.87 213.131.234.88
+    }
+}

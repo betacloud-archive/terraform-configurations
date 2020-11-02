@@ -1,16 +1,15 @@
 $ORIGIN okeanos.xyz.
 $TTL 3600
-@              IN SOA coredns1.data-infrastructure.xyz. berendt.betacloud-solutions.de. (
-                      2015082541
-                      7200
-                      3600
-                      1209600
-                      3600
-                      )
-@              IN NS coredns1.data-infrastructure.xyz.
-@              IN NS coredns2.data-infrastructure.xyz.
-@              IN A 127.0.0.1
-testbed-gx-iam IN A 81.163.192.112
-keycloak       IN A 81.163.192.135
-gardener       IN A 213.131.230.153
-*.gardener     IN A 213.131.230.153
+@                  IN SOA coredns1.data-infrastructure.xyz. berendt.betacloud-solutions.de. (
+                          2015082541
+                          7200
+                          3600
+                          1209600
+                          3600
+                          )
+@                  IN NS coredns1.data-infrastructure.xyz.
+@                  IN NS coredns2.data-infrastructure.xyz.
+@                  IN A 127.0.0.1
+testbed-gx-iam     IN A 81.163.192.112
+keycloak           IN A 81.163.192.135
+univention.testbed IN A 213.131.230.147
