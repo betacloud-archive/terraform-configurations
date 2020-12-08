@@ -34,3 +34,9 @@ gardener.okeanos.xyz:53 {
         transfer from 213.131.234.86 213.131.234.87 213.131.234.88
     }
 }
+
+prod.gardener-test.site:53 {
+    secondary {
+        transfer from 213.131.234.86 213.131.234.87 213.131.234.88
+    }
+}
