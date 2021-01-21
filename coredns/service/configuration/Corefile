@@ -16,26 +16,19 @@ okeanos.xyz:53 {
   errors
 }
 
-okeanos.dev:53 {
-  any
-  file /configuration/okeanos.dev.db
-  log
-  errors
-}
-
 gx.okeanos.dev:53 {
     secondary {
         transfer from 213.131.234.86 213.131.234.87 213.131.234.88
     }
 }
 
-gardener.okeanos.xyz:53 {
+prod.gardener-test.site:53 {
     secondary {
         transfer from 213.131.234.86 213.131.234.87 213.131.234.88
     }
 }
 
-prod.gardener-test.site:53 {
+staging.gardener-test.site:53 {
     secondary {
         transfer from 213.131.234.86 213.131.234.87 213.131.234.88
     }
